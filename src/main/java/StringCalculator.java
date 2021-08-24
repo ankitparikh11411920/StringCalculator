@@ -4,7 +4,8 @@ public class StringCalculator {
         if(s.isEmpty()) {
             return 0;
         }
-        if(s.contains(",")){
+        if(s.contains(",") ||  s.contains("\n")){
+            s = s.replaceAll("\n",",");
             String[] numbers = s.split(",");
             int sum = 0;
             for (String number : numbers) {

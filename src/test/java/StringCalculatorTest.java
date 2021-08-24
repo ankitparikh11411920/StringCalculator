@@ -13,6 +13,9 @@ public class StringCalculatorTest {
         assertEquals(15,calculator.add("1,2,3,4,5"));
         assertEquals(55,calculator.add("1,2,3,4,5,6,7,8,9,10"));
         assertEquals(7954,calculator.add("11,11,11,1,45,23,98,100,7654"));
+        assertEquals(6,calculator.add("1\n2,3"));
+        assertEquals(55,calculator.add("1\n2\n3\n4,5,6\n7,8\n9,10"));
+
 
     }
 }
