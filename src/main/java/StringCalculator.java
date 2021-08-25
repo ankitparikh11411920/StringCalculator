@@ -4,6 +4,16 @@ public class StringCalculator {
         if(s.isEmpty()) {
             return 0;
         }
+        if(s.startsWith("//")){
+            char delimeter = s.charAt(2);
+            String value = s.substring(4);
+            String[] arr = value.split(String.valueOf(delimeter));
+            int sum = 0;
+            for(String number : arr){
+                sum += Integer.parseInt(number);
+            }
+            return sum;
+        }
         if(s.contains(",") ||  s.contains("\n")){
             s = s.replaceAll("\n",",");
             String[] numbers = s.split(",");
