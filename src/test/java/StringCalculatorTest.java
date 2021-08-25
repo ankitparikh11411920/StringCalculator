@@ -20,5 +20,6 @@ public class StringCalculatorTest {
         assertEquals(0,calculator.add("//#\n1#2#3#-4#5"));
         assertEquals(0,calculator.add("1,2,3,-4,5"));
         assertEquals(0,calculator.add("-1,-2,-3,-4,-5"));
+        assertEquals(14,calculator.getCalledCount());
     }
 }

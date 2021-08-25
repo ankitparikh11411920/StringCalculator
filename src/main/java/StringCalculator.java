@@ -1,7 +1,7 @@
-import javafx.scene.transform.Scale;
-
 public class StringCalculator {
+    static int calledCount = 0;
     public int add(String s) {
+        calledCount++;
         if(s.isEmpty()) {
             return 0;
         }
@@ -18,6 +18,9 @@ public class StringCalculator {
 
         }
         return Integer.parseInt(s);
+    }
+    int getCalledCount(){
+        return calledCount;
     }
     int sum(String[] array) {
         int sum = 0;
