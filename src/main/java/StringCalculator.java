@@ -1,5 +1,6 @@
-public class StringCalculator {
+import javafx.scene.transform.Scale;
 
+public class StringCalculator {
     public int add(String s) {
         if(s.isEmpty()) {
             return 0;
@@ -18,16 +19,16 @@ public class StringCalculator {
         }
         return Integer.parseInt(s);
     }
-    int sum(String[] array){
+    int sum(String[] array) {
         int sum = 0;
-        for(String number : array){
-            try{
-                if(Integer.parseInt(number) < 0){
-                    throw new InvalidNumberException(number);
-                }else{
+        for (String number : array) {
+            try {
+                if (Integer.parseInt(number) < 0) {
+                    throw new InvalidNumberException(array);
+                } else {
                     sum += Integer.parseInt(number);
                 }
-            }catch(InvalidNumberException exc){
+            } catch (InvalidNumberException exc) {
                 return 0;
             }
         }
@@ -35,8 +36,12 @@ public class StringCalculator {
     }
 }
 class InvalidNumberException extends Exception{
-    InvalidNumberException(String number){
+    InvalidNumberException(String[] numbers){
         System.out.println("negatives not allowed");
-        System.out.println(number);
+        for(String number : numbers){
+            if(Integer.parseInt(number) < 0){
+                System.out.println(number);
+            }
+        }
     }
 }
