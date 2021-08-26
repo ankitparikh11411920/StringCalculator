@@ -7,16 +7,27 @@ public class StringCalculator {
             return 0;
         }
         if (s.startsWith("//")) {
-            char delimeter = s.charAt(2);
-            String value = s.substring(4);
-            String[] numbers = value.split(String.valueOf(delimeter));
+            String value;
+            StringBuilder delimeter = new StringBuilder();
+            if (s.contains("[")) {
+                int start = 3;
+                while (s.charAt(start) != ']') {
+                    delimeter.append(s.charAt(start));
+                    start++;
+                }
+                value = s.substring(2 + start);
+            } else {
+                delimeter.append(s.charAt(2));
+                value = s.substring(4);
+            }
+            value = value.replace(delimeter.toString(), ",");
+            String[] numbers = value.split(",");
             return sum(numbers);
         }
         if (s.contains(",") || s.contains("\n")) {
             s = s.replaceAll("\n", ",");
             String[] numbers = s.split(",");
             return sum(numbers);
-
         }
         return Integer.parseInt(s);
     }
