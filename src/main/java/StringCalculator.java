@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     static int calledCount = 0;
 
@@ -8,26 +13,27 @@ public class StringCalculator {
         }
         if (s.startsWith("//")) {
             String value;
-            StringBuilder delimeter = new StringBuilder();
-            if (s.contains("[")) {
-                int start = 3;
-                while (s.charAt(start) != ']') {
-                    delimeter.append(s.charAt(start));
-                    start++;
+            if (s.contains("[") && s.contains("]")) {
+                List<String> delimeters = new ArrayList<>();
+                Pattern pattern = Pattern.compile("\\[(.*?)]");
+                Matcher matcher = pattern.matcher(s);
+                while (matcher.find()) {
+                    delimeters.add(matcher.group(1));
                 }
-                value = s.substring(2 + start);
+                int last_index = s.lastIndexOf("]");
+                value = s.substring(last_index + 2);
+                for (String delimeter : delimeters) {
+                    value = value.replace(delimeter, ",");
+                }
             } else {
-                delimeter.append(s.charAt(2));
                 value = s.substring(4);
+                value = value.replace(String.valueOf(s.charAt(2)), ",");
             }
-            value = value.replace(delimeter.toString(), ",");
-            String[] numbers = value.split(",");
-            return sum(numbers);
+            return sum(value);
         }
         if (s.contains(",") || s.contains("\n")) {
-            s = s.replaceAll("\n", ",");
-            String[] numbers = s.split(",");
-            return sum(numbers);
+            s = s.replace("\n", ",");
+            return sum(s);
         }
         return Integer.parseInt(s);
     }
@@ -36,8 +42,10 @@ public class StringCalculator {
         return calledCount;
     }
 
-    int sum(String[] array) {
+    //helper function to make code more readable
+    int sum(String numbers) {
         int sum = 0;
+        String[] array = numbers.split(",");
         for (String number : array) {
             if (Integer.parseInt(number) <= 1000) {
                 try {

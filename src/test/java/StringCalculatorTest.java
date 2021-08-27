@@ -24,5 +24,7 @@ public class StringCalculatorTest {
         assertEquals(100, calculator.add("//;\n1;2;3;4;5;85;1001"));
         assertEquals(6, calculator.add("//[***]\n1***2***3"));
         assertEquals(6, calculator.add("//[##]\n1##2##3"));
+        assertEquals(6, calculator.add("//[*][%]\n1*2%3"));
+        assertEquals(10, calculator.add("//[***][%%%]\n1***2%%%3%%%4"));
     }
 }
